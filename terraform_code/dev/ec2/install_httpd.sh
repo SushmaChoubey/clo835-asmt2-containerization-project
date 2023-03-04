@@ -23,4 +23,5 @@ export DATABASE=employees
 export DBPWD=db_pass123
 #Login into ECR repository
 aws ecr get-login-password --region us-east-1 |sudo docker login -u AWS ${ECR} --password-stdin
+aws ecr get-login-password --region us-east-1|kubectl create secret docker-registry regcred --docker-server='983372048879.dkr.ecr.us-east-1.amazonaws.com/clo835-assigmt2-repo' --docker-username=AWS  --docker-email='schoubey1@myseneca.ca' --docker-password=stdin
 EOF
