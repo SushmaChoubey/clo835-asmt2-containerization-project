@@ -10,21 +10,21 @@ spec:
     ports:
     - containerPort: 8080
     env:
-    - name: APP_COLOR
-      value: "blue"
     - name: DBHOST
-      value: kubectl get pod mkubectl get pod mysql-pod --namespace=mysqlpod-namespace -o jsonpath='{.status.podIP}'
+      valueFrom:
+        configMapKeyRef:
+          name: my-configmap
+          key: mydb-keymy 
+    - name: DBPWD
+      value: "db_pass123"
     - name: DBPORT
       value: "3306"
     - name: DBUSER
       value: "root"
-    - name: DBPWD
-      value: "db_pass123"
- dnsPolicy: ClusterFirst
- restartPolicy: Always
- imagePullSecrets:
+    - name: APP_COLOR
+      value: "blue"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  imagePullSecrets:
     - name: regcred
 status: {}
-
-
-

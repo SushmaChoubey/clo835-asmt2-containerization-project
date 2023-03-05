@@ -17,7 +17,7 @@ resource "aws_instance" "k8s" {
     volume_size = 16
   }
 
-  user_data = file("${path.module}/install_httpd.sh")
+  //user_data = file("${path.module}/install_httpd.sh")
    
 
   vpc_security_group_ids = [
