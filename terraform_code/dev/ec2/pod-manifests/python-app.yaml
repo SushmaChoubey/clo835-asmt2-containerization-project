@@ -14,7 +14,7 @@ spec:
       valueFrom:
         configMapKeyRef:
           name: my-configmap
-          key: mydb-keymy 
+          key: mydb-key
     - name: DBPWD
       value: "db_pass123"
     - name: DBPORT
