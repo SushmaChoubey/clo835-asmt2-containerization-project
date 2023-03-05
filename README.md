@@ -1,7 +1,8 @@
 # clo835-asmt2-containerization-project
-scp -i ~/.ssh/schoubeykey init_kind.sh kind.yaml install_httpd.sh 3.238.192.136:/tmp
-scp -i ~/.ssh/schoubeykey pod-manifests/python-app.yaml pod-manifests/mysql-manual.yaml 3.238.192.136:/tmp
-ssh -i ~/.ssh/schoubeykey 3.238.192.136
+scp -i ~/.ssh/schoubeykey init_kind.sh kind.yaml install_httpd.sh 44.214.135.121:/tmp
+scp -i ~/.ssh/schoubeykey pod-manifests/python-app.yaml pod-manifests/mysql-manual.yaml 44.214.135.121:/tmp
+scp -i ~/.ssh/schoubeykey replicaset-manifests/mysql-rs.yaml replicaset-manifests/python-app-rs.yaml 44.214.135.121:/tmp
+ssh -i ~/.ssh/schoubeykey 44.214.135.121
 cd /tmp
 chmod 777 init_kind.sh install_httpd.sh
 ./init_kind.sh
@@ -17,5 +18,5 @@ k get pods -n mypythonpod-namespace
 k logs my-python-app-pod -n mypythonpod-namespace
 k port-forward my-python-app-pod -n mypythonpod-namespace 8080:8080
 ----In new Terminal-----
-ssh -i ~/.ssh/schoubeykey 3.238.192.136
+ssh -i ~/.ssh/schoubeykey 44.214.135.121
 curl localhost:8080
