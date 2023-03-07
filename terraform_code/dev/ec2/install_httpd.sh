@@ -26,5 +26,6 @@ kubectl create configmap my-configmap --from-literal=mydb-key=$(kubectl get pod 
 kubectl create -f python-app.yaml -n mypythonpod-namespace
 #Replicaset
 kubectl create -f mysql-rs.yaml -n mysqlpod-namespace
-kubectl create -f mysql-cofigmap.yaml -n mypythonpod-namespace
+# ConfigMap to get ClusterIP of DB service
+kubectl create configmap mysqldb-configmap --from-literal=database_url=$(kubectl get svc mysqldb-service -n mysqlpod-namespace -o jsonpath='{.spec.clusterIP}') -n mypythonpod-namespace
 kubectl create -f python-app-rs.yaml -n mypythonpod-namespace
