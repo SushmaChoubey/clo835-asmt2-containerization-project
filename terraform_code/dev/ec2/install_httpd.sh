@@ -25,6 +25,6 @@ kubectl create ns mypythonpod-namespace
 kubectl create configmap my-configmap --from-literal=mydb-key=$(kubectl get pod mysql-pod --namespace=mysqlpod-namespace -o jsonpath='{.status.podIP}') -n mypythonpod-namespace
 kubectl create -f python-app.yaml -n mypythonpod-namespace
 #Replicaset
-#kubectl create -f mysql-rs.yaml -n mysqlpod-namespace
-#kubectl create configmap my-configmap-rs --from-literal=mydb-key=$(kubectl get replicaset mysql-rs --namespace=mysqlpod-namespace -o jsonpath='{.status.podIP}') -n mypythonpod-namespace
-#kubectl create -f python-app-rs.yaml -n mypythonpod-namespace
+kubectl create -f mysql-rs.yaml -n mysqlpod-namespace
+kubectl create -f mysql-cofigmap.yaml -n mypythonpod-namespace
+kubectl create -f python-app-rs.yaml -n mypythonpod-namespace
