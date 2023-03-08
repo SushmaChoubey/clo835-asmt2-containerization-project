@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-python-app-pod
+  name: python-app
 spec:
   containers:
   - image: 983372048879.dkr.ecr.us-east-1.amazonaws.com/clo835-assigmt2-repo:my_app_img
@@ -13,8 +13,8 @@ spec:
     - name: DBHOST
       valueFrom:
         configMapKeyRef:
-          name: my-configmap
-          key: mydb-key
+          name: mysqldb-configmap
+          key: database_url
     - name: DBPWD
       value: "db_pass123"
     - name: DBPORT

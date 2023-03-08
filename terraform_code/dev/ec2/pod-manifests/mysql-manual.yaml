@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   labels:
     run: mysql
-  name: mysql-pod
+  name: mysql
 spec:
   containers:
   - image: 983372048879.dkr.ecr.us-east-1.amazonaws.com/clo835-assigmt2-repo:my_db_img
