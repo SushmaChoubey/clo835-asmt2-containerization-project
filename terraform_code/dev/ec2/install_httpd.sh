@@ -15,7 +15,7 @@ kubectl wait --for=condition=Ready pod/mysql -n mysqlpod-namespace
 #Namespace for running PYTHON APP POD MANIFEST
 kubectl create ns mypythonpod-namespace
 #ConfigMap for Storing MYSQLDB Service Cluster IP
-kubectl create configmap mysqldb-configmap --from-literal=database_url=$(kubectl get svc mysqldb-service -n mysqlpod-namespace -o jsonpath='{.spec.clusterIP}') -n mypythonpod-namespace
+kubectl create configmap mysqldb-configmap --from-literal=database_url=$(kubectl get svc mysql -n mysqlpod-namespace -o jsonpath='{.spec.clusterIP}') -n mypythonpod-namespace
 kubectl create -f python-app.yaml -n mypythonpod-namespace
 #Replicaset
 kubectl create -f mysql-rs.yaml -n mysqlpod-namespace
@@ -25,4 +25,14 @@ kubectl create -f mysql-deployment.yaml -n mysqlpod-namespace
 kubectl create -f python-app-deployment.yaml -n mypythonpod-namespace
 #Creating NodePort Service
 kubectl create -f python-app-svc.yaml -n mypythonpod-namespace
-kubectl port-forward svc/python-app-service 8080:8080 -n mypythonpod-namespace
+#kubectl port-forward svc/python-app 8080:8080 -n mypythonpod-namespace
+
+#Deletion
+k delete deployment python-app -n mypythonpod-namespace
+k delete deployment mysql -n mysqlpod-namespace  
+k delete replicaset mysql -n mysqlpod-namespace  
+k delete replicaset python-app -n mypythonpod-namespace
+k delete svc python-app -n mypythonpod-namespace 
+k delete svc mysql -n mysqlpod-namespace
+k delete pod mysql -n mysqlpod-namespace
+k delete pod python-app -n mypythonpod-namespace 
