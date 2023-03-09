@@ -30,7 +30,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: clo835-assigmt2-repo
-        IMAGE_TAG: my_app_img
+        IMAGE_TAG: my_app_img_version2
       run: |
         cd application/
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .

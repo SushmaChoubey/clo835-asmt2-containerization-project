@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  labels:
+    app: employees  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      containers:
+        - image: 983372048879.dkr.ecr.us-east-1.amazonaws.com/clo835-assigmt2-repo:my_app_img
+          name: python-container
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi 
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysqldb-configmap
+                  key: database_url
+            - name: DBPWD
+              value: db_pass123
+            - name: DBPORT
+              value: '3306'
+            - name: DBUSER
+              value: root
+            - name: APP_COLOR
+              value: blue
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: regcred
